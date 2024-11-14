@@ -84,7 +84,8 @@ select {
     background-position: right 10px center; 
     background-size: 12px; 
 }
-/* Espaciado adicional para el boton de agregar cita */
+
+/* Espaciado adicional para el botón de agregar cita */
 button[type="submit"] {
     margin-top: 10px; 
 }
@@ -103,6 +104,7 @@ nav {
 
 nav ul {
     list-style-type: none;
+    padding: 0; /* Añadido para evitar espacio extra */
 }
 
 nav ul li {
@@ -120,7 +122,7 @@ nav ul li a:hover {
     color: #ffcc00; 
 }
 
-/* Estilos del Pie de Pagina */
+/* Estilos del Pie de Página */
 footer {
     background-color: #f4f4f4; 
     color: #333; 
@@ -132,19 +134,11 @@ footer {
     box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); 
 }
 
-/* Estilos Generales */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
+/* Estilos para la Sección de Bienvenida */
 main {
     padding: 20px; 
 }
 
-/* Estilos para la Sección de Bienvenida */
 .welcome-section {
     background-color: #ffffff; 
     padding: 30px;
@@ -170,7 +164,7 @@ main {
 }
 
 .link-list li {
-    margin: 10px 0; 
+    margin : 10px 0; 
 }
 
 .link-list .btn {
