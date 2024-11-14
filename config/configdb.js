@@ -6,9 +6,9 @@ const db = mysql.createConnection({
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
-    port: 3306 // Asegúrate de especificar el puerto si es necesario
+    port: 3306 
 });
-
+const promiseDb = db.promise();
 db.connect((err) => {
     if (err) {
         console.error('Error conectando a la base de datos: ', err);
