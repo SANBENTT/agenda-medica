@@ -42,6 +42,19 @@ class Appointment {
     static deleteAppointment(id, callback) {
         db.query('DELETE FROM appointments WHERE id = ?', [id], callback);
     }
+
+    static isAppointmentAvailable(doctor_id, appointment_date, appointment_time, callback) {
+        db.query(
+            'SELECT * FROM appointments WHERE doctor_id = ? AND appointment_date = ? AND appointment_time = ? AND status != "canceled"',
+            [doctor_id, appointment_date, appointment_time],
+            (err, results) => {
+                if (err) return callback(err);
+                callback(null, results.length === 0); // Devuelve `true` si está disponible
+            }
+        );
+    }
+    
+
 }
 
 module.exports = Appointment;

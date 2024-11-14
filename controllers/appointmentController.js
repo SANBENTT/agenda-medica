@@ -8,13 +8,33 @@ exports.getAppointments = (req, res) => {
     });
 };
 
-exports.addAppointment = (req, res) => {
-    const newAppointment = req.body;
-    Appointment.addAppointment(newAppointment, (err) => {
-        if (err) throw err;
+exports.addAppointment = async (req, res) => {
+    const { doctor_id, patient_name, patient_dni, appointment_date, appointment_time, reason, status } = req.body;
+
+    try {
+        
+        const [existingAppointments] = await db.promise().query(
+            'SELECT * FROM appointments WHERE doctor_id = ? AND appointment_date = ? AND appointment_time = ? AND status != "canceled"',
+            [doctor_id, appointment_date, appointment_time]
+        );
+
+        if (existingAppointments.length > 0) {
+            return res.status(400).send("El horario ya está ocupado para este doctor.");
+        }
+
+        
+        await db.promise().query(
+            'INSERT INTO appointments (doctor_id, patient_name, patient_dni, appointment_date, appointment_time, reason, status) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+            [doctor_id, patient_name, patient_dni, appointment_date, appointment_time, reason, status]
+        );
+
         res.redirect('/appointments');
-    });
+    } catch (error) {
+        console.error("Error al agregar la cita:", error);
+        res.status(500).send("Hubo un problema al agregar la cita.");
+    }
 };
+
 
 exports.editAppointment = async (req, res) => {
     const { id } = req.params;
