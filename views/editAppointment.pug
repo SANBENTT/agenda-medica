@@ -26,13 +26,14 @@ block content
 
     .form-group
       label(for="reason") Reason:
-      input(type="text" name="reason" id="reason" value=appointment.reason required)
+      input(type="text" name="reason" id="reason" value=appointment.reason)
 
     .form-group
       label(for="status") Status:
-      select(name="status" id="status" required)
-        option(value="Scheduled", selected=appointment.status == "Scheduled") Scheduled
-        option(value="Completed", selected=appointment.status == "Completed") Completed
-        option(value="Canceled", selected=appointment.status == "Canceled") Canceled
+      select(name="status")
+        option(value="reserved" selected=appointment.status === 'reserved') Reserved
+        option(value="confirmed" selected=appointment.status === 'confirmed') Confirmed
+        option(value="canceled" selected=appointment.status === 'canceled') Canceled
+        option(value="absent" selected=appointment.status === 'absent') Absent
 
     button(type="submit") Update Appointment

@@ -56,6 +56,7 @@ exports.updateAppointment = (req, res) => {
     });
 };
 
+
 exports.deleteAppointment = (req, res) => {
     const id = req.params.id;
     Appointment.deleteAppointment(id, (err) => {
