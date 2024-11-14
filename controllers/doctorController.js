@@ -21,10 +21,10 @@ exports.editDoctor = async (req, res) => {
     const { id } = req.params;
     try {
         const [doctor] = await db.promise().query('SELECT * FROM doctors WHERE id = ?', [id]);
-        if (doctor.length === 0) return res.status(404).send("Doctor no funciono");
+        if (doctor.length === 0) return res.status(404).send("Doctor not found");
         res.render('editDoctor', { doctor: doctor[0] });
     } catch (error) {
-        res.status(500).send("Error al recuperar datos del médico");
+        res.status(500).send("Error retrieving doctor data");
     }
 };
 
@@ -37,7 +37,7 @@ exports.updateDoctor = async (req, res) => {
         res.redirect('/doctors');
     } catch (error) {
         console.error(error);  
-        res.status(500).send("Error al actualizar doctor");
+        res.status(500).send("Error updating doctor");
     }
 };
 
