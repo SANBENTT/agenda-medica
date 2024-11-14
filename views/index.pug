@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    section(class='welcome-section')
+        h1 Bienvenido a la Agenda de Consultas Médicas
+        p Para gestionar médicos y citas, utiliza los siguientes enlaces:
+        ul(class='link-list')
+            li: a(href='/doctors', class='btn') Gestionar Médicos
+            li: a(href='/appointments', class='btn') Gestionar Citas

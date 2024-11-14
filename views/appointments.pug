@@ -1,0 +1,50 @@
+extends layout
+
+block content
+    h1 Gestión de Citas
+    table
+        thead
+            tr
+                th ID
+                th Médico
+                th Nombre del Paciente
+                th th DNI del Paciente
+                th Fecha de Cita
+                th Hora de Cita
+                th Motivo
+                th Estado
+                th Acciones
+        tbody
+            each appointment in appointments
+                tr
+                    td= appointment.id
+                    td= appointment.doctor_id
+                    td= appointment.patient_name
+                    td= appointment.patient_dni
+                    td= appointment.appointment_date
+                    td= appointment.appointment_time
+                    td= appointment.reason
+                    td= appointment.status
+                    td
+                        a(href=`/appointments/delete/${appointment.id}`, class='btn') Borrar
+                        a(href=`/appointments/update/${appointment.id}`, class='btn') Editar
+    h2 Agregar Cita
+    form(action='/appointments/add', method='POST')
+        div(class='form-group')
+            input(type='text', name='doctor_id', placeholder='ID del Médico', required)
+        div(class='form-group')
+            input(type='text', name='patient_name', placeholder='Nombre del Paciente', required)
+        div(class='form-group')
+            input(type='text', name='patient_dni', placeholder='DNI del Paciente', required)
+        div(class='form-group')
+            input(type='date', name='appointment_date', required)
+        div(class='form-group')
+            input(type='time', name='appointment_time', required)
+        div(class='form-group')
+            input(type='text', name='reason', placeholder='Motivo', required)
+        div(class='form-group')
+            select(name='status')
+                option(value='reserved') Reservado
+                option(value='confirmed') Confirmado
+                option(value='canceled') Cancelado
+        button(type='submit') Agregar Cita

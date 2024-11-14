@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    h1 Gestión de Médicos
+    table
+        thead
+            tr
+                th ID
+                th Nombre
+                th Número de Licencia
+                th Especialidades
+                th Estado
+                th Acciones
+        tbody
+            each doctor in doctors
+                tr
+                    td= doctor.id
+                    td= doctor.name
+                    td= doctor.license_number
+                    td= doctor.specialties
+                    td= doctor.status
+                    td
+                        a(href=`/doctors/delete/${doctor.id}`) Borrar
+                        a(href=`/doctors/edit/${doctor.id}`) Editar
+    h2 Agregar Médico
+    form(action='/doctors/add', method='POST')
+        input(type='text', name='name', placeholder='Nombre', required)
+        input(type='text', name='license_number', placeholder='Número de Licencia', required)
+        input(type='text', name='specialties', placeholder='Especialidades', required)
+        select(name='status')
+            option(value='active') Activo
+            option(value='inactive') Inactivo
+        button(type='submit') Agregar Médico

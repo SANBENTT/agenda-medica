@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 Editar Doctor: #{doctor.name}
+
+  form(action=`/doctors/edit/${doctor.id}`, method='POST')
+    .form-group
+      label(for='name') Nombre:
+      input(type='text', name='name', id='name', value=doctor.name required)
+
+    .form-group
+      label(for='specialty') Especialidad:
+      input(type='text', name='specialty', id='specialty', value=doctor.specialty required)
+
+    .form-group
+      label(for='status') Estado:
+      select(name='status', id='status', required)
+        option(value='1', selected=doctor.status == 1) Activo
+        option(value='0', selected=doctor.status == 0) Inactivo
+
+    button(type='submit') Guardar cambios
