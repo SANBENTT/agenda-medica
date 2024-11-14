@@ -20,8 +20,8 @@ block content
                     td= doctor.specialties
                     td= doctor.status
                     td
-                        a(href=`/doctors/delete/${doctor.id}`) Borrar
-                        a(href=`/doctors/edit/${doctor.id}`) Editar
+                        a(href=`/doctors/delete/${doctor.id}`, class='btn') Borrar
+                        a(href=`/doctors/edit/${doctor.id}`, class='btn') Editar
     h2 Agregar Médico
     form(action='/doctors/add', method='POST')
         input(type='text', name='name', placeholder='Nombre', required)
