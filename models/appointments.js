@@ -49,7 +49,7 @@ class Appointment {
             [doctor_id, appointment_date, appointment_time],
             (err, results) => {
                 if (err) return callback(err);
-                callback(null, results.length === 0); // Devuelve `true` si está disponible
+                callback(null, results.length === 0); 
             }
         );
     }

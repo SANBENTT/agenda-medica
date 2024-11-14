@@ -43,37 +43,48 @@ exports.editAppointment = async (req, res) => {
         const appointment = appointmentResult[0];
 
         if (!appointment) {
-            return res.status(404).send("Appointment not found");
+            return res.status(404).send("cita no funciona");
         }
 
         res.render('editAppointment', { appointment });
     } catch (error) {
-        console.error("Error retrieving appointment:", error);
-        res.status(500).send("Error retrieving appointment data");
+        console.error("Error al agregar la cita", error);
+        res.status(500).send("Hubo un problema al agregar la cita.");
     }
 };
 
-exports.updateAppointment = (req, res) => {
+exports.updateAppointment = async (req, res) => {
     const { id } = req.params;
     const { date, time, doctor_id, patient_name, patient_dni, reason, status } = req.body;
 
-    const updatedAppointment = {
-        appointment_date: date,
-        appointment_time: time,
-        doctor_id,
-        patient_name,
-        patient_dni,
-        reason,
-        status,
-    };
+    try {
+        
+        const [existingAppointments] = await db.promise().query(
+            'SELECT * FROM appointments WHERE doctor_id = ? AND appointment_date = ? AND appointment_time = ? AND id != ? AND status != "canceled"',
+            [doctor_id, date, time, id]
+        );
 
-    Appointment.updateAppointment(id, updatedAppointment, (err) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send("Error updating appointment");
+        if (existingAppointments.length > 0) {
+            return res.status(400).send("El horario ya está ocupado para este doctor.");
         }
+
+        
+        const updatedAppointment = {
+            appointment_date: date,
+            appointment_time: time,
+            doctor_id,
+            patient_name,
+            patient_dni,
+            reason,
+            status,
+        };
+
+        await Appointment.updateAppointment(id, updatedAppointment);
         res.redirect('/appointments');
-    });
+    } catch (error) {
+        console.error("Error al actualizar la cita:", error);
+        res.status(500).send("Error al actualizar la cita.");
+    }
 };
 
 
