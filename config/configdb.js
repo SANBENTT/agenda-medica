@@ -8,7 +8,7 @@ const db = mysql.createConnection({
     database: process.env.DB_NAME,
     port: 3306 
 });
-const promiseDb = db.promise();
+
 db.connect((err) => {
     if (err) {
         console.error('Error conectando a la base de datos: ', err);

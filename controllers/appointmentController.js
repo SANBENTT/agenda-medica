@@ -19,7 +19,7 @@ exports.addAppointment = (req, res) => {
 exports.editAppointment = async (req, res) => {
     const { id } = req.params;
     try {
-        const [appointmentResult] = await db.query('SELECT * FROM appointments WHERE id = ?', [id]);
+        const [appointmentResult] = await db.promise().query('SELECT * FROM appointments WHERE id = ?', [id]);
         const appointment = appointmentResult[0];
 
         if (!appointment) {
@@ -32,7 +32,6 @@ exports.editAppointment = async (req, res) => {
         res.status(500).send("Error retrieving appointment data");
     }
 };
-
 
 exports.updateAppointment = (req, res) => {
     const { id } = req.params;
