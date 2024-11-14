@@ -6,31 +6,31 @@ block content
   form(action=`/appointments/update/${appointment.id}`, method="POST")
     .form-group
       label(for="date") Fecha:
-      input(type="date", name="date", id="date", value=appointment.appointment_date, required)
+      input(type="date" name="date" id="date" value=appointment.appointment_date required)
 
     .form-group
       label(for="time") Hora:
-      input(type="time", name="time", id="time", value=appointment.appointment_time, required)
+      input(type="time" name="time" id="time" value=appointment.appointment_time required)
 
     .form-group
       label(for="doctor_id") ID del Médico:
-      input(type="number", name="doctor_id", id="doctor_id", value=appointment.doctor_id, required)
+      input(type="number" name="doctor_id" id="doctor_id" value=appointment.doctor_id required)
 
     .form-group
       label(for="patient_name") Nombre del Paciente:
-      input(type="text", name="patient_name", id="patient_name", value=appointment.patient_name, required)
+      input(type="text" name="patient_name" id="patient_name" value=appointment.patient_name required)
 
     .form-group
       label(for="patient_dni") DNI del Paciente:
-      input(type="text", name="patient_dni", id="patient_dni", value=appointment.patient_dni, required)
+      input(type="text" name="patient_dni" id="patient_dni" value=appointment.patient_dni required)
 
     .form-group
       label(for="reason") Motivo:
-      input(type="text", name="reason", id="reason", value=appointment.reason)
+      input(type="text" name="reason" id="reason" value=appointment.reason)
 
     .form-group
       label(for="status") Estado:
-      select(name="status", id="status", required)
+      select(name="status")
         option(value="reserved", selected=appointment.status === 'reserved') Reservado
         option(value="confirmed", selected=appointment.status === 'confirmed') Confirmado
         option(value="canceled", selected=appointment.status === 'canceled') Cancelado

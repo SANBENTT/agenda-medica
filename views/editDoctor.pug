@@ -6,11 +6,11 @@ block content
   form(action=`/doctors/edit/${doctor.id}`, method='POST')
     .form-group
       label(for='name') Nombre:
-      input(type='text', name='name', id='name', value=doctor.name, required)
+      input(type='text', name='name', id='name', value=doctor.name required)
 
     .form-group
       label(for='specialty') Especialidad:
-      input(type='text', name='specialty', id='specialty', value=doctor.specialty, required)
+      input(type='text', name='specialty', id='specialty', value=doctor.specialty required)
 
     .form-group
       label(for='status') Estado:
