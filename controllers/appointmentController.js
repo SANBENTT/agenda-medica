@@ -37,7 +37,6 @@ exports.updateAppointment = (req, res) => {
     const { id } = req.params;
     const { date, time, doctor_id, patient_name, patient_dni, reason, status } = req.body;
 
-    
     const updatedAppointment = {
         appointment_date: date,
         appointment_time: time,
